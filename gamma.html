@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gamma</title>
+  <style type="text/css">
+    select {
+      background: white;
+      border: 1px solid lightgray;
+      border-radius: 3px;
+      padding: 3px;
+      margin-right: 25px;
+    }
+
+    #tonika {
+      width: 40px;
+     
+    }
+    #type {
+      width: 63px;
+    }
+
+    .title {
+      display: inline-block;
+      font: 15px Tahoma;
+    }
+
+    button {
+      background: lightgray;
+      border: 1px solid #e5e5e5;
+      border-radius: 5px;
+      padding: 5px 10px;
+      outline: none;
+      cursor: pointer;
+      transition: transform .1s;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    #result {
+      width: 347px;
+      border-top: 1px solid lightgray;
+      padding-top: 10px;
+      font: 16px Tahoma;
+      text-align: center;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<script type="text/javascript" src="gamma.js"></script>
+<body>
+
+<div class="title">Тоника: </div>
+
+<select id="tonika">
+	<option value="A" selected="true">A</option>
+  <option value="B">B</option>
+  <option value="C">C</option>
+  <option value="D">D</option>
+  <option value="E">E</option>
+  <option value="F">F</option>
+  <option value="G">G</option>
+</select>
+
+<div class="title">Гамма: </div>
+
+<select id="type">
+  <option value="major" selected="true">major</option>
+  <option value="minor">minor</option>
+  <option value="blues">blues</option>
+</select>
+
+<button id="create">Построить</button>
+
+<br/>
+<br/>
+
+<div id="result"></div>
+
+<script type="text/javascript">
+  const _tonika = document.getElementById("tonika").value,
+        _type = document.getElementById("type").value;
+
+  document.getElementById("result").innerHTML = getScale(_tonika, _type).join(' ').replace(/b/g, '<sub>b</sub>').replace(/#/g, '<sub>#</sub>');
+
+  document.getElementById("create").addEventListener("click", () => { 
+    const tonika = document.getElementById("tonika").value,
+          type = document.getElementById("type").value;
+    document.getElementById("result").innerHTML = getScale(tonika, type).join(' ').replace(/b/g, '<sub>b</sub>').replace(/#/g, '<sub>#</sub>');
+  });
+</script>
+
+</body>
+</html>
